@@ -29,4 +29,11 @@ defmodule Block do
     }
   end
 
+  def valid?(%Block{} = block) do
+    Crypto.hash(block) == block.hash
+  end
+
+  def valid?(%Block{} = block, %Block{} = prev_block) do
+    block.prev_hash == prev_block.hash and valid?(block)
+  end
 end

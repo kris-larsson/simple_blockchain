@@ -6,7 +6,7 @@ defmodule Crypto do
     |> Base.encode16()
   end
 
-  defp hash(%Block{} = block) do
+  def hash(%Block{} = block) do
     block
     |> Map.take(@hash_fields)
     |> Poison.encode!()
