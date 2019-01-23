@@ -1,6 +1,6 @@
 defmodule Block do
 
-  @enforce_keys [:data, :hash, :prev_hash, :timestamp]
+  @enforce_keys [:data, :prev_hash, :timestamp]
 
   defstruct [:data, :hash, :prev_hash, :timestamp]
 
@@ -14,16 +14,14 @@ defmodule Block do
   def genesis do
     %Block{
       data: "GENESIS",
-      hash: "GENESIS",
-      prev_hash: "GENESIS",
+      prev_hash: "ZERO_BLOCK",
       timestamp: NaiveDateTime.utc_now()
     }
   end
 
-  def add(data, prev_hash) do
+  def new(data, prev_hash) do
     %Block{
       data: data,
-      hash: "tmp",
       prev_hash: prev_hash,
       timestamp: NaiveDateTime.utc_now()
     }
