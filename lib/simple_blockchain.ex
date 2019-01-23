@@ -2,4 +2,15 @@ defmodule SimpleBlockchain do
   def create_genesis_block do
     [ Crypto.add_hash(Block.genesis()) ]
   end
+
+  def create_new_block(blockchain, data) do
+    %Block{hash: prev_hash} = hd(blockchain)
+
+    block =
+      data
+      |> Block.new(prev_hash)
+      |> Crypto.add_hash()
+
+    [ block | blockchain ]
+  end
 end
