@@ -1,6 +1,6 @@
 defmodule Block do
 
-  @enforce_keys [:data] #, :hash, :prev_hash, :timestamp]
+  @enforce_keys [:data, :hash, :prev_hash, :timestamp]
 
   defstruct [:data, :hash, :prev_hash, :timestamp]
 
@@ -10,5 +10,14 @@ defmodule Block do
     prev_hash: String.t(),
     timestamp: NaiveDateTime
   }
+
+  def genesis do
+    %Block{
+      data: "GENESIS",
+      hash: "GENESIS",
+      prev_hash: "GENESIS",
+      timestamp: NaiveDateTime.utc_now()
+    }
+  end
 
 end
