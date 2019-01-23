@@ -13,7 +13,7 @@ defmodule Crypto do
     |> sha256()
   end
 
-  def add_hash(%{Block{} = block) do
+  def add_hash(%Block{} = block) do
     Map.put(block, :hash, hash(block))
   end
 end
