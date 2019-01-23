@@ -20,4 +20,13 @@ defmodule Block do
     }
   end
 
+  def add(data, prev_hash) do
+    %Block{
+      data: data,
+      hash: "tmp",
+      prev_hash: prev_hash,
+      timestamp: NaiveDateTime.utc_now()
+    }
+  end
+
 end
