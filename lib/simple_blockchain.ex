@@ -1,4 +1,5 @@
 defmodule SimpleBlockchain do
+
   def create_genesis_block do
     [ Crypto.add_hash(Block.genesis()) ]
   end
@@ -24,4 +25,5 @@ defmodule SimpleBlockchain do
 
     Block.valid?(genesis)
   end
+
 end
