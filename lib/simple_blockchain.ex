@@ -13,4 +13,15 @@ defmodule SimpleBlockchain do
 
     [ block | blockchain ]
   end
+
+  def valid?([head | tail]) do
+    genesis = Enum.reduce_while(tail, head, fn(prev, current) ->
+      cond do
+         Block.valid?(current, prev) -> {:cont, prev}
+         true -> {:halt, false}
+      end
+    end)
+
+    Block.valid?(genesis)
+  end
 end
