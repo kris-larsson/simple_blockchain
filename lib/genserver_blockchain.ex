@@ -1,14 +1,19 @@
-defmodule GenserverBlockchain do
+defmodule GenServerBlockchain do
   use GenServer
 
   # Client
 
   def start_link() do
-    GenServer.start_link(__MODULE__, Block.genesis())
+    genesis = SimpleBlockchain.create_genesis_block()
+    GenServer.start_link(__MODULE__, genesis, name: __MODULE__)
   end
 
-  def push(pid, block) do
-    GenServer.cast(pid, {:push, block})
+  def view do
+    GenServer.call(__MODULE__, :lookup)
+  end
+
+  def push(block) do
+    GenServer.cast(__MODULE__, {:push, block})
   end
 
 
@@ -17,6 +22,11 @@ defmodule GenserverBlockchain do
   @impl true
   def init(chain) do
     {:ok, chain}
+  end
+
+  @impl true
+  def handle_call(:lookup, _from, chain) do
+    {:reply, chain, chain}
   end
 
   @impl true
